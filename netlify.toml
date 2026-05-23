@@ -1,0 +1,7 @@
+[build]
+  command = "pnpm install && pnpm build"
+  publish = "artifacts/devtraco-plus/dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--legacy-peer-deps"
