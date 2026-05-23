@@ -5,7 +5,7 @@ import cors from "cors";
 const require = createRequire(import.meta.url);
 const pinoHttpImport = require("pino-http") as typeof import("pino-http");
 const pinoHttp = (pinoHttpImport.default ?? pinoHttpImport) as typeof import("pino-http")["default"];
-import router from "./routes";
+import router from "./routes/index.js";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
