@@ -1,4 +1,4 @@
-import app from "./app";
+import app from "./app.js";
 import type { Request, Response } from "express";
 
 // Export a default handler so serverless platforms (Vercel) can invoke the

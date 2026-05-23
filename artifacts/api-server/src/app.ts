@@ -6,7 +6,7 @@ const require = createRequire(import.meta.url);
 const pinoHttpImport = require("pino-http") as typeof import("pino-http");
 const pinoHttp = (pinoHttpImport.default ?? pinoHttpImport) as typeof import("pino-http")["default"];
 import router from "./routes/index.js";
-import { logger } from "./lib/logger";
+import { logger } from "./lib/logger.js";
 
 const app: Express = express();
 

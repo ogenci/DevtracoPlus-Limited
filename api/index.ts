@@ -5,7 +5,7 @@ import type { Request, Response } from "express";
 // in Vercel logs. Any import/runtime error will be logged and a 500 returned.
 export default async function (req: Request, res: Response) {
 	try {
-		const mod = await import("../artifacts/api-server/src/serverless");
+		const mod = await import("../artifacts/api-server/src/serverless.js");
 		const handler = mod.default ?? mod;
 		return handler(req, res);
 	} catch (err) {
