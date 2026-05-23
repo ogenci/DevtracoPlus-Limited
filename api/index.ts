@@ -2,11 +2,11 @@ import type { Request, Response } from "express";
 
 async function loadHandler() {
 	try {
-		return (await import("../artifacts/api-server/dist/index.mjs")).default;
+		return (await import("./artifacts/api-server/dist/index.mjs")).default;
 	} catch (err) {
 		// Fallback to source file if the built dist artifact is not available.
 		// This keeps local dev and direct TS deployments working.
-		const mod = await import("../artifacts/api-server/src/serverless.ts");
+		const mod = await import("./artifacts/api-server/src/serverless.ts");
 		return mod.default ?? mod;
 	}
 }
