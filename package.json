@@ -8,7 +8,7 @@
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
     "vercel-build": "pnpm build",
     "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/devtraco-plus\" --filter \"./artifacts/mockup-sandbox\" --filter \"./scripts\" --if-present run typecheck"
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/devtraco-plus\" --if-present run typecheck"
   },
   "private": true,
   "devDependencies": {
