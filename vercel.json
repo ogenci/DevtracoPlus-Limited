@@ -1,15 +1,16 @@
 {
   "version": 2,
-  "outputDirectory": "artifacts/devtraco-plus/dist/public",
   "functions": {
     "api/index.ts": {
-      "runtime": "nodejs18.x",
+      "runtime": "nodejs18",
       "maxDuration": 10,
       "includeFiles": "artifacts/api-server/dist/**"
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.ts" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    }
   ]
 }
