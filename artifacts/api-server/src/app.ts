@@ -3,7 +3,8 @@ import type { IncomingMessage, ServerResponse } from "http";
 import { createRequire } from "node:module";
 import cors from "cors";
 const require = createRequire(import.meta.url);
-const pinoHttp = require("pino-http") as typeof import("pino-http");
+const pinoHttpImport = require("pino-http") as typeof import("pino-http");
+const pinoHttp = (pinoHttpImport.default ?? pinoHttpImport) as typeof import("pino-http")["default"];
 import router from "./routes";
 import { logger } from "./lib/logger";
 
