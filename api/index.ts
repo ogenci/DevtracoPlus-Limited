@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { IncomingMessage, ServerResponse } from "http";
 
 async function loadHandler() {
 	try {
@@ -11,7 +11,7 @@ async function loadHandler() {
 	}
 }
 
-export default async function (req: Request, res: Response) {
+export default async function (req: IncomingMessage, res: ServerResponse) {
 	try {
 		const handler = await loadHandler();
 		return handler(req, res);
@@ -19,6 +19,8 @@ export default async function (req: Request, res: Response) {
 		// Log the full error so Vercel shows stack traces in the function logs.
 		// eslint-disable-next-line no-console
 		console.error("Serverless handler init error:", err);
-		res.status(500).json({ error: "Server initialization failed" });
+		res.statusCode = 500;
+		res.setHeader("Content-Type", "application/json");
+		res.end(JSON.stringify({ error: "Server initialization failed" }));
 	}
 }
