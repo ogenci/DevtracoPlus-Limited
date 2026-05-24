@@ -6,7 +6,7 @@
     "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
     "dev": "pnpm --filter @workspace/devtraco-plus dev",
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "vercel-build": "pnpm build",
+    "vercel-build": "pnpm build && rm -rf ./public && cp -R artifacts/devtraco-plus/dist/public ./public",
     "typecheck:libs": "tsc --build",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/devtraco-plus\" --if-present run typecheck"
   },
