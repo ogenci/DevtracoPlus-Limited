@@ -47,3 +47,6 @@ Thumbs.db
 .cache/
 .local/
 .vercel
+
+# build output (root-level, copied from artifacts)
+/public

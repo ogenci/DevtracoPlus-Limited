@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "buildCommand": "pnpm build && rm -rf ./public && cp -R artifacts/devtraco-plus/dist/public ./public",
+  "outputDirectory": "public",
   "functions": {
     "api/index.ts": {
       "maxDuration": 10,
