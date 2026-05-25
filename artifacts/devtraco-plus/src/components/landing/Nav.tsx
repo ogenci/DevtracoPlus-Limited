@@ -1,6 +1,6 @@
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Phone,
   List,
@@ -133,7 +133,7 @@ function MegaMenuPanel({ menuKey }: { menuKey: MegaMenuKey }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 8, scale: 0.97 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute left-0 right-0 top-full mt-1 z-50 w-full rounded-xl sm:rounded-2xl bg-foreground text-background border border-white/10 shadow-[0_30px_70px_rgba(0,0,0,0.6)] overflow-hidden grid grid-cols-1 xl:grid-cols-12"
+      className="rounded-xl sm:rounded-2xl bg-foreground text-background border border-white/10 shadow-[0_30px_70px_rgba(0,0,0,0.6)] overflow-hidden grid grid-cols-1 xl:grid-cols-12"
     >
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
@@ -214,11 +214,12 @@ function DesktopDropdown({
     <div onMouseEnter={onActivate}>
       <button
         aria-expanded={isActive}
-        className={
+        className={cn(
+          "relative flex items-center gap-1 font-medium rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-all duration-500 group whitespace-nowrap",
           isCapsule
-            ? "relative flex items-center gap-1 px-2.5 xl:px-3.5 py-[7px] text-xs xl:text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors group"
-            : "relative flex items-center gap-1 px-3 xl:px-4 py-[9px] text-sm font-medium rounded-full text-white/85 hover:text-white hover:bg-white/10 transition-colors group"
-        }
+            ? "px-2.5 xl:px-3.5 py-[7px] text-xs xl:text-[13px]"
+            : "px-3 xl:px-4 py-[9px] text-sm"
+        )}
       >
         <FlipText label={item.label} />
         <CaretDown
@@ -312,10 +313,32 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<MegaMenuKey | null>(null);
   const [location] = useLocation();
+  const [navRect, setNavRect] = useState({ left: 0, width: 0 });
+  const navRef = useRef<HTMLElement>(null);
+  const navLinksRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const updateNavRect = useCallback(() => {
+    if (navLinksRef.current && headerRef.current) {
+      const headerRect = headerRef.current.getBoundingClientRect();
+      const linksRect = navLinksRef.current.getBoundingClientRect();
+      setNavRect({
+        left: linksRect.left - headerRect.left,
+        width: linksRect.width,
+      });
+    }
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (v) => {
     setScrolled(v > 80);
   });
+
+  useEffect(() => {
+    updateNavRect();
+    const ro = new ResizeObserver(updateNavRect);
+    if (navLinksRef.current) ro.observe(navLinksRef.current);
+    return () => ro.disconnect();
+  }, [updateNavRect, scrolled]);
 
   useEffect(() => {
     setOpen(false);
@@ -338,6 +361,7 @@ export default function Nav() {
         )}
       >
         <div
+          ref={headerRef}
           data-nav-inner
           onMouseLeave={() => setActiveMegaMenu(null)}
           className={cn(
@@ -365,8 +389,12 @@ export default function Nav() {
             />
           </Link>
 
-          <nav className="z-10 hidden lg:flex items-center gap-0.5 xl:gap-1 transition-all duration-500 min-w-0">
+          <nav
+            ref={navRef}
+            className="z-10 hidden lg:flex items-center gap-0.5 xl:gap-1 transition-all duration-500 min-w-0"
+          >
             <div
+              ref={navLinksRef}
               className={cn(
                 "flex items-center gap-0.5 xl:gap-1 transition-all duration-500 min-w-0",
                 !scrolled && "px-1.5 xl:px-2 py-[7px] rounded-full bg-white/10 backdrop-blur-md"
@@ -382,11 +410,21 @@ export default function Nav() {
                     onActivate={() => setActiveMegaMenu(l.label as MegaMenuKey)}
                   />
                 ) : l.route ? (
-                  <Link key={l.label} href={l.href!} className={linkClass(scrolled)}>
+                  <Link
+                    key={l.label}
+                    href={l.href!}
+                    className={linkClass(scrolled)}
+                    onMouseEnter={() => setActiveMegaMenu(null)}
+                  >
                     <FlipText label={l.label} />
                   </Link>
                 ) : (
-                  <a key={l.label} href={l.href!} className={linkClass(scrolled)}>
+                  <a
+                    key={l.label}
+                    href={l.href!}
+                    className={linkClass(scrolled)}
+                    onMouseEnter={() => setActiveMegaMenu(null)}
+                  >
                     <FlipText label={l.label} />
                   </a>
                 )
@@ -437,7 +475,22 @@ export default function Nav() {
           </div>
 
           <AnimatePresence>
-            {activeMegaMenu && <MegaMenuPanel key={activeMegaMenu} menuKey={activeMegaMenu} />}
+            {activeMegaMenu && (
+              <motion.div
+                key={activeMegaMenu}
+                initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className={cn(
+                  "absolute top-full mt-1 z-50",
+                  scrolled ? "left-[1%] w-[98%]" : "w-auto"
+                )}
+                style={!scrolled ? { left: navRect.left, width: navRect.width || undefined } : undefined}
+              >
+                <MegaMenuPanel menuKey={activeMegaMenu} />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </motion.header>
