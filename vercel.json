@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm -r --if-present run build && rm -rf ./public && cp -R artifacts/devtraco-plus/dist/public ./public",
+  "buildCommand": "pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/devtraco-plus run build && rm -rf ./public && cp -R artifacts/devtraco-plus/dist/public ./public",
   "outputDirectory": "public",
   "functions": {
     "api/index.ts": {
