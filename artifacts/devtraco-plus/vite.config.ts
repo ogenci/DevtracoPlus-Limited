@@ -6,6 +6,7 @@ import path from "path";
 
 const port = Number(process.env.PORT) || 5173;
 const basePath = process.env.BASE_PATH || "/";
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 export default defineConfig({
   base: basePath,
@@ -15,14 +16,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "src"),
+      "@": path.resolve(__dirname, "src"),
     },
     dedupe: ["react", "react-dom"],
   },
-  root: path.resolve(import.meta.dirname),
+  root: __dirname,
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
+    outDir: "../../public",
     target: "esnext",
     minify: "esbuild",
     sourcemap: false,
