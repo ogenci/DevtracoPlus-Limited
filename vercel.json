@@ -2,7 +2,6 @@
   "version": 2,
   "buildCommand": "rm -rf ./public && pnpm --filter @workspace/devtraco-plus run build",
   "outputDirectory": "public",
-  "rootDirectory": ".",
   "rewrites": [
     {
       "source": "/(.*)",
