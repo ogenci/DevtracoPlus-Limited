@@ -48,5 +48,5 @@ Thumbs.db
 .local/
 .vercel
 
-# build output (root-level, copied from artifacts)
+# build output (written by Vite)
 /public

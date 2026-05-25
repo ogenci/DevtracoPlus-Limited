@@ -1,19 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "rm -rf ./public && pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/devtraco-plus run build",
+  "buildCommand": "rm -rf ./public && pnpm --filter @workspace/devtraco-plus run build",
   "outputDirectory": "public",
   "rootDirectory": ".",
-  "functions": {
-    "api/index.ts": {
-      "maxDuration": 10,
-      "includeFiles": "artifacts/api-server/dist/**"
-    }
-  },
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.ts"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"

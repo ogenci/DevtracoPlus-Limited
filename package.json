@@ -4,17 +4,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "pnpm --filter @workspace/devtraco-plus dev",
-    "build": "pnpm run typecheck && pnpm -r --if-present run build && rm -rf ./public && cp -R artifacts/devtraco-plus/dist/public ./public",
-    "vercel-build": "pnpm build && rm -rf ./public && cp -R artifacts/devtraco-plus/dist/public ./public",
+    "build": "pnpm run typecheck && pnpm --filter @workspace/devtraco-plus run build",
     "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/devtraco-plus\" --if-present run typecheck"
+    "typecheck": "pnpm run typecheck:libs && pnpm --filter @workspace/devtraco-plus run typecheck"
   },
   "private": true,
   "devDependencies": {
     "typescript": "~5.9.2",
     "prettier": "^3.8.1",
-    "express": "^5.0.0",
-    "@types/express": "^5.0.6",
     "@types/node": "^25.3.3"
   }
 }
