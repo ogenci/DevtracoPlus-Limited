@@ -382,6 +382,7 @@ export default function Nav() {
             <img
               src={images.logo}
               alt="Devtraco Plus"
+              loading="lazy" decoding="async"
               className={cn(
                 "w-auto transition-all duration-500 max-w-[120px] sm:max-w-none brightness-0 invert",
                 scrolled ? "h-7 sm:h-8 lg:h-[31px]" : "h-8 sm:h-10 md:h-11 lg:h-12"
@@ -508,6 +509,7 @@ export default function Nav() {
               <img
                 src={images.logo}
                 alt="Devtraco Plus"
+                loading="lazy" decoding="async"
                 className="h-8 sm:h-9 w-auto max-w-[140px]"
               />
               <button

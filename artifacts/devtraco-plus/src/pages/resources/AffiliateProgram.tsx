@@ -57,6 +57,7 @@ export default function AffiliateProgram() {
             <img
               src={images.arlo}
               alt="Affiliate Partner Program"
+              fetchPriority="high" decoding="async"
               className="w-full h-full object-cover brightness-[0.3]"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10" />

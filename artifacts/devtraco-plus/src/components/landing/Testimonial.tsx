@@ -83,6 +83,7 @@ function VideoCard({
         <img
           src={story.poster}
           alt={`${story.author} testimonial — ${story.project}`}
+          loading="lazy" decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06]"
         />
 

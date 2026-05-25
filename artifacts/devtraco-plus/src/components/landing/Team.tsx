@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { LinkedinLogo } from "@phosphor-icons/react";
-import team1 from "@/assets/team-1.png";
-import team2 from "@/assets/team-2.png";
-import team3 from "@/assets/team-3.png";
-import team4 from "@/assets/team-4.png";
+import team1 from "@/assets/team-1.webp";
+import team2 from "@/assets/team-2.webp";
+import team3 from "@/assets/team-3.webp";
+import team4 from "@/assets/team-4.webp";
 
 const members = [
   {

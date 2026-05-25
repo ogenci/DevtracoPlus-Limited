@@ -59,6 +59,7 @@ export default function AboutPage() {
             <img
               src={images.homepage}
               alt="About Devtraco Plus"
+              fetchPriority="high" decoding="async"
               className="w-full h-full object-cover brightness-[0.35]"
             />
             {/* Gradients to assure premium glass/dark aesthetics and readability */}
@@ -135,6 +136,7 @@ export default function AboutPage() {
                     <img
                       src={activeEvent.image}
                       alt={activeEvent.title}
+                      loading="lazy" decoding="async"
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>

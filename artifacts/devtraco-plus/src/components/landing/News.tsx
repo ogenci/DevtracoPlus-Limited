@@ -101,6 +101,7 @@ export default function News() {
               <img
                 src={feature.image}
                 alt={feature.title}
+                loading="lazy" decoding="async"
                 className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
@@ -157,6 +158,7 @@ export default function News() {
                   <img
                     src={a.image}
                     alt={a.title}
+                    loading="lazy" decoding="async"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06]"
                   />
                   <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/85 backdrop-blur-md text-foreground text-[9.5px] uppercase tracking-[0.2em] font-semibold">

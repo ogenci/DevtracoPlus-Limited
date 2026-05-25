@@ -17,6 +17,7 @@ export default function About() {
             <img 
               src={images.forte} 
               alt="Forte Residences" 
+              loading="lazy" decoding="async"
               className="w-full h-full object-cover object-center"
             />
           </motion.div>

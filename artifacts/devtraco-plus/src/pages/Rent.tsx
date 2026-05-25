@@ -107,6 +107,7 @@ export default function Rent() {
             <img
               src={images.pelican}
               alt="Executive Leasing"
+              fetchPriority="high" decoding="async"
               className="w-full h-full object-cover brightness-[0.3]"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10" />
@@ -212,6 +213,7 @@ export default function Rent() {
                       <img
                         src={r.image}
                         alt={r.name}
+                        loading="lazy" decoding="async"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-102"
                       />
                       <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />

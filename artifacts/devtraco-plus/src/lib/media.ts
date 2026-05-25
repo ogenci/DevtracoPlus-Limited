@@ -8,11 +8,11 @@ export function mediaUrl(path: string): string {
 
 export const images = {
   logo: mediaUrl("media/logo.png"),
-  homepage: mediaUrl("media/homepage.jpg"),
-  address: mediaUrl("media/address.jpg"),
-  pelican: mediaUrl("media/pelican.jpg"),
-  arlo: mediaUrl("media/arlo.jpg"),
-  forte: mediaUrl("media/forte.jpg"),
+  homepage: mediaUrl("media/homepage.webp"),
+  address: mediaUrl("media/address.webp"),
+  pelican: mediaUrl("media/pelican.webp"),
+  arlo: mediaUrl("media/arlo.webp"),
+  forte: mediaUrl("media/forte.webp"),
 } as const;
 
 export const imageFallback = images.homepage;

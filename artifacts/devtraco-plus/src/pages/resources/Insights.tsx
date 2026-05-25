@@ -77,6 +77,7 @@ export default function Insights() {
             <img
               src={images.pelican}
               alt="Devtraco Portfolio Insights"
+              fetchPriority="high" decoding="async"
               className="w-full h-full object-cover brightness-[0.3]"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10" />
@@ -150,6 +151,7 @@ export default function Insights() {
                       <img
                         src={art.image}
                         alt={art.title}
+                        loading="lazy" decoding="async"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-102"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />

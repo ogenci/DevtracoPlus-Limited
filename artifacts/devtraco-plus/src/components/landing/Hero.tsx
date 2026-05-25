@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "@phosphor-icons/react";
-import heroImage from "@/assets/hero.png";
+import heroImage from "@/assets/hero.webp";
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);

@@ -104,6 +104,7 @@ export default function Contact() {
             <img
               src={images.address}
               alt="Devtraco Plus Sales Gallery"
+              fetchPriority="high" decoding="async"
               className="w-full h-full object-cover brightness-[0.32]"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10" />
@@ -519,6 +520,7 @@ export default function Contact() {
             <img
               src={images.pelican}
               alt="Devtraco Plus Cantonments, Accra"
+              loading="lazy" decoding="async"
               className="w-full h-full object-cover brightness-[0.45]"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-transparent" />
